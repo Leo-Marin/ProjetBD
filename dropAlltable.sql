@@ -1,0 +1,127 @@
+
+
+
+-- TOUS LES DROPS
+
+DROP TABLE EMPLOYE;
+DROP TABLE VENTE;
+DROP TABLE HORAIRE;
+DROP TABLE PRODUIT;
+DROP TABLE TRAVAILLE;
+DROP TABLE CONGE;
+DROP TABLE EST_COMMANDE;
+DROP TABLE CLIENT;
+DROP TABLE MARCHANDISE;
+DROP TABLE COMMANDE;
+
+
+-- -- DROP EMPLOYE
+-- BEGIN
+--     EXECUTE IMMEDIATE 'DROP TABLE EMPLOYE';
+-- EXCEPTION
+--     WHEN OTHERS THEN
+--         IF SQLCODE != -942 THEN
+--             RAISE;
+--         END IF;
+-- END;
+-- /
+--
+-- -- DROP CONGE
+-- BEGIN
+--     EXECUTE IMMEDIATE 'DROP TABLE CONGE';
+-- EXCEPTION
+--     WHEN OTHERS THEN
+--         IF SQLCODE != -942 THEN
+--             RAISE;
+--         END IF;
+-- END;
+-- /
+--
+-- -- DROP CLIENT
+-- BEGIN
+--     EXECUTE IMMEDIATE 'DROP TABLE CLIENT';
+-- EXCEPTION
+--     WHEN OTHERS THEN
+--         IF SQLCODE != -942 THEN
+--             RAISE;
+--         END IF;
+-- END;
+-- /
+--
+-- -- DROP MARCHANDISE
+-- BEGIN
+--     EXECUTE IMMEDIATE 'DROP TABLE MARCHANDISE';
+-- EXCEPTION
+--     WHEN OTHERS THEN
+--         IF SQLCODE != -942 THEN
+--             RAISE;
+--         END IF;
+-- END;
+-- /
+--
+-- -- DROP COMMANDE
+-- BEGIN
+--     EXECUTE IMMEDIATE 'DROP TABLE COMMANDE';
+-- EXCEPTION
+--     WHEN OTHERS THEN
+--         IF SQLCODE != -942 THEN
+--             RAISE;
+--         END IF;
+-- END;
+-- /
+--
+-- -- DROP PRODUIT
+-- BEGIN
+--     EXECUTE IMMEDIATE 'DROP TABLE PRODUIT';
+-- EXCEPTION
+--     WHEN OTHERS THEN
+--         IF SQLCODE != -942 THEN
+--             RAISE;
+--         END IF;
+-- END;
+-- /
+--
+-- -- DROP TRAVAILLE
+-- BEGIN
+--     EXECUTE IMMEDIATE 'DROP TABLE TRAVAILLE';
+-- EXCEPTION
+--     WHEN OTHERS THEN
+--         IF SQLCODE != -942 THEN
+--             RAISE;
+--         END IF;
+-- END;
+-- /
+--
+-- -- DROP EST_COMMANDE
+-- BEGIN
+--     EXECUTE IMMEDIATE 'DROP TABLE EST_COMMANDE';
+-- EXCEPTION
+--     WHEN OTHERS THEN
+--         IF SQLCODE != -942 THEN
+--             RAISE;
+--         END IF;
+-- END;
+-- /
+--
+-- -- DROP HORAIRE
+-- BEGIN
+--     EXECUTE IMMEDIATE 'DROP TABLE HORAIRE';
+-- EXCEPTION
+--     WHEN OTHERS THEN
+--         IF SQLCODE != -942 THEN
+--             RAISE;
+--         END IF;
+-- END;
+-- /
+--
+-- -- DROP VENTE
+-- BEGIN
+--     EXECUTE IMMEDIATE 'DROP TABLE VENTE';
+-- EXCEPTION
+--     WHEN OTHERS THEN
+--         IF SQLCODE != -942 THEN
+--             RAISE;
+--         END IF;
+-- END;
+-- /
+

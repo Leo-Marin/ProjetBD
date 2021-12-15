@@ -1,0 +1,96 @@
+CREATE TABLE EMPLOYE(
+                        ID_EMPLOYE INT(10) AUTO_INCREMENT ,
+                        NOM VARCHAR(25) NOT NULL,
+                        PRENOM VARCHAR(25) NOT NULL,
+                        SALAIRE DECIMAL(10) NOT NULL,
+                        AGE INT(10) CHECK (AGE>=18),
+                        DIPLOME VARCHAR(25),
+                        CONSTRAINT PK_EMPLOYE PRIMARY KEY (ID_EMPLOYE)
+);
+
+
+CREATE TABLE CONGE(
+                      JOUR VARCHAR(10) CHECK (JOUR IN ('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI')),
+                      NUMERO_SEMAINE INT(2),
+                      ID_EMPLOYE INT(10),
+                      CONSTRAINT PK_CONGE PRIMARY KEY (JOUR,NUMERO_SEMAINE,ID_EMPLOYE),
+                      CONSTRAINT FK_EMPLOYE_CONGE FOREIGN KEY (ID_EMPLOYE) REFERENCES EMPLOYE(ID_EMPLOYE)
+);
+
+CREATE TABLE CLIENT(
+                       ID_CLIENT INT(10) AUTO_INCREMENT,
+                       NOM VARCHAR(25) NOT NULL,
+                       PRENOM VARCHAR(25) NOT NULL,
+                       AGE INT(3) CHECK (AGE BETWEEN 0 AND 120),
+                       CONSTRAINT PK_CLIENT PRIMARY KEY (ID_CLIENT)
+);
+
+
+CREATE TABLE COMMANDE(
+                         ID_COMMANDE INT(10) AUTO_INCREMENT,
+                         NOM_FOURNISSEUR VARCHAR(25),
+                         PRIX DECIMAL(6),
+                         CONSTRAINT PK_COMMANDE PRIMARY KEY (ID_COMMANDE)
+);
+
+
+CREATE TABLE PRODUIT(
+                        ID_PRODUIT INT(10) AUTO_INCREMENT,
+                        NOM_MARCH VARCHAR(25) NOT NULL,
+                        PRIX DECIMAL(5),
+                        PRESCRIPTION BOOLEAN,
+                        TAUX_REMBOURSEMENT DECIMAL(3),
+                        DESCRIPTION VARCHAR(25),
+                        QUANTITE INT(4),
+                        CONSTRAINT PK_PRODUIT PRIMARY KEY (ID_PRODUIT)
+);
+
+CREATE TABLE MARCHANDISE(
+                            ID_MARCH INT(10) AUTO_INCREMENT,
+                            ID_PRODUIT INT(10),
+                            ID_COMMANDE INT(10),
+                            CONSTRAINT PK_MARCH PRIMARY KEY (ID_MARCH),
+                            CONSTRAINT FK_PRODUIT_MARCH FOREIGN KEY (ID_PRODUIT) REFERENCES PRODUIT(ID_PRODUIT),
+                            CONSTRAINT FK_COMMANDE_MARCH FOREIGN KEY (ID_COMMANDE) REFERENCES  COMMANDE(ID_COMMANDE)
+);
+
+
+
+CREATE TABLE HORAIRE(
+                        ID_HORAIRE INT(10) AUTO_INCREMENT,
+                        PLAGE VARCHAR(25) CHECK (PLAGE IN ('8H-12H','14H-18H')),
+                        JOUR_SEMAINE VARCHAR(25) CHECK (JOUR_SEMAINE IN ('LUNDI','MARDI','MERCREDI','JEUDI','VENDREDI','SAMEDI')),
+                        NUMERO_SEMAINE INT(2) CHECK (NUMERO_SEMAINE BETWEEN 1 AND 53),
+                        CONSTRAINT PK_HORAIRE PRIMARY KEY (ID_HORAIRE)
+);
+
+CREATE TABLE TRAVAILLE(
+                          ID_EMPLOYE INT(10),
+                          ID_HORAIRE INT(10),
+                          CONSTRAINT PK_TRAVAILLE PRIMARY KEY (ID_EMPLOYE,ID_HORAIRE),
+                          CONSTRAINT FK_EMPLOYE_TRV FOREIGN KEY (ID_EMPLOYE) REFERENCES EMPLOYE(ID_EMPLOYE),
+                          CONSTRAINT FK_HORAIRE_TRV FOREIGN KEY (ID_HORAIRE) REFERENCES HORAIRE(ID_HORAIRE)
+);
+
+
+CREATE TABLE VENTE(
+                      ID_EMPLOYE INT(10),
+                      ID_MARCH INT(10),
+                      ID_CLIENT INT(10),
+                      PRESCRIPTION BOOLEAN,
+                      DATE_VENTE DATE,
+                      CONSTRAINT PK_VENTE PRIMARY KEY (ID_EMPLOYE,ID_MARCH,ID_CLIENT),
+                      CONSTRAINT FK_EMPLOYE_VEN FOREIGN KEY (ID_EMPLOYE) REFERENCES EMPLOYE(ID_EMPLOYE),
+                      CONSTRAINT FK_MARCH_VEN FOREIGN KEY (ID_MARCH) REFERENCES MARCHANDISE(ID_MARCH),
+                      CONSTRAINT FK_CLIENT_VEN FOREIGN KEY (ID_CLIENT) REFERENCES CLIENT(ID_CLIENT)
+);
+
+
+CREATE TABLE EST_COMMANDE(
+                             ID_PRODUIT INT(10),
+                             ID_COMMANDE INT(10),
+                             QUANTITE INT(4),
+                             CONSTRAINT PK_ESTCOMMANDE PRIMARY KEY (ID_PRODUIT,ID_COMMANDE),
+                             CONSTRAINT FK_PRODUIT_COMM FOREIGN KEY (ID_PRODUIT) REFERENCES PRODUIT(ID_PRODUIT),
+                             CONSTRAINT FK_COMMANDE_COMM FOREIGN KEY (ID_COMMANDE) REFERENCES COMMANDE(ID_COMMANDE)
+);
