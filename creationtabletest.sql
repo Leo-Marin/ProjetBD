@@ -147,11 +147,11 @@ CREATE TABLE COMMANDE(
 
 CREATE TABLE PRODUIT(
                         ID_PRODUIT NUMBER /*GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1)*/,
-                        NOM_MARCH VARCHAR(25) NOT NULL,
+                        NOM_PRODUIT VARCHAR(25) NOT NULL,
                         PRIX DECIMAL(5),
                         PRESCRIPTION CHAR(1) CHECK (PRESCRIPTION IN ('1','0')),
                         TAUX_REMBOURSEMENT DECIMAL(3),
-                        DESCRIPTION VARCHAR(25),
+                        DESCRIPTION VARCHAR(200),
                         QUANTITE NUMERIC(4,0),
                         CONSTRAINT PK_PRODUIT PRIMARY KEY (ID_PRODUIT)
 );
