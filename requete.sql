@@ -21,7 +21,33 @@ GROUP BY fournisseur
 
 /*La division jsais po*/
 
+/*les athlètes + MEDOC qui ont participé uniquement aux épreuves
+ de la table EPREUVE =CLIENT et à aucune autre (Division "exacte"), ici Martin.
+ PARTICIPER = PRODUIT
+ EPREUVE = CLIENT*/
+ 
+/* SELECT ID_PRODUIT, NOM_PRODUIT 
+FROM PRODUIT A
+WHERE NOT EXISTS (
+                SELECT * 
+                FROM EPREUVE
+                WHERE NOT EXISTS (
+                    SELECT * 
+                    FROM PARTICIPER B JOIN CLIENT C ON C.ID_CLIENT=B.ID_CLIENT
+                    WHERE (A.Athlète = B.Athlète) AND (B.Epreuve = EPREUVE.Epreuve)))
+GROUP BY Athlète
+HAVING COUNT(*) = (SELECT COUNT (DISTINCT Epreuve) FROM EPREUVE) ;
 
+
+SELECT *
+FROM PILOTE
+WHERE NOT EXISTS (SELECT *
+    FROM AVION
+    WHERE NOT EXISTS (SELECT *
+        FROM VOL
+        WHERE VOL.Plnum=PILOTE.Plnum
+        AND VOL.Avnum=AVION.Avnum));
+ */
 /* -------------------------------------*/
 
 

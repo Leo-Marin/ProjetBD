@@ -5,7 +5,7 @@
 
 CREATE TRIGGER tr_travaille_max_add
 BEFORE INSERT ON TRAVAILLE
-
+FOR EACH ROW
 DECLARE
 v_nb NUMBER;
 
@@ -16,8 +16,8 @@ BEGIN
                                                         FROM HORAIRE h2
                                                         WHERE h2.NUMERO_SEMAINE IN ( SELECT H.NUMERO_SEMAINE AS nmr_sem
                                                                                      FROM HORAIRE H
-                                                                                     WHERE ID_HORAIRE = NEW.ID_HORAIRE));
-    IF cpt_h*8 >=  40 THEN
+                                                                                     WHERE ID_HORAIRE = :NEW.ID_HORAIRE));
+    IF v_nb*8 >=  40 THEN
     RAISE_APPLICATION_ERROR(-20001, 'Le salarié ebosse déjà assez khoya');
     END IF;
 END;
@@ -31,6 +31,7 @@ END;
 
 CREATE OR REPLACE TRIGGER nb_salarieSametime_max
 BEFORE INSERT ON TRAVAILLE
+FOR EACH ROW
 DECLARE
 v_nbpersonne NUMBER;
 
@@ -54,12 +55,13 @@ END;
 
 CREATE OR REPLACE TRIGGER produit_prerscri
 BEFORE INSERT ON VENTE
+FOR EACH ROW
 DECLARE
 v_prescri CHAR(1);
 
 BEGIN
     
-    IF NEW.PRESCRIPTION='0' THEN    
+    IF :NEW.PRESCRIPTION='0' THEN    
         SELECT PRODUIT.PRESCRIPTION INTO v_prescri
         FROM PRODUIT JOIN MARCHANDISE ON PRODUIT.ID_PRODUIT=MARCHANDISE.ID_PRODUIT
         WHERE ID_MARCH =:NEW.ID_MARCH;
