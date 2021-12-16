@@ -1,4 +1,4 @@
-DELIMITER //
+--DELIMITER //
 CREATE TRIGGER tr_travaille_max_add
 BEFORE INSERT ON TRAVAILLE
 
@@ -18,7 +18,7 @@ BEGIN
     END IF;
 END;
 /
-//
+--//
 
-SHOW ERROR
+--SHOW ERROR
 /*---------QUESTION 9--------------*/
