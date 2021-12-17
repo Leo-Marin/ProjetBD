@@ -55,6 +55,13 @@ HAVING COUNT(*) = (SELECT COUNT (DISTINCT ID_CLIENT) FROM CLIENT) ;
 
 
 /* -------------------------------------*/
+
+SELECT NOM, PRENOM, NOM_PRODUIT
+FROM CLIENT C JOIN VENTE V ON C.ID_CLIENT=V.ID_CLIENT
+    JOIN MARCHANDISE M ON V.ID_MARCH=M.ID_MARCH
+    JOIN PRODUIT P ON M.ID_PRODUIT=P.ID_PRODUIT
+ORDER BY NOM;
+
 /* -------------------------------------*/
 /* -------------------------------------*/
 /* -------------------------------------*/
